@@ -1,0 +1,21 @@
+# ISPWatch Robots.txt
+# Control de crawlers para SEO óptimo
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://ispwatch.io/sitemap.xml
+
+# Crawl-delay (opcional, ajustar según necesidad)
+# Crawl-delay: 1
+
+# Bloquear archivos y directorios no públicos (si existen)
+Disallow: /admin/
+Disallow: /private/
+Disallow: /.git/
+Disallow: /node_modules/
+
+# Permitir crawling de recursos CSS y JS para renderizado
+Allow: /styles/
+Allow: /js/
