@@ -1466,6 +1466,8 @@ textarea {
 }
 
 /* ========== Responsive ========== */
+
+/* Large Tablets & Small Laptops (1024px) */
 @media (max-width: 1024px) {
   .hero-content {
     grid-template-columns: 1fr;
@@ -1534,25 +1536,44 @@ textarea {
     grid-column: span 2;
     max-width: 100%;
   }
+
+  /* Features grid responsive */
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Trusted logos responsive */
+  .trusted-logos {
+    gap: 40px;
+  }
+
+  .trusted-logo {
+    font-size: 1.25rem;
+  }
 }
 
+/* Tablets (768px) */
 @media (max-width: 768px) {
   :root {
     --section-padding: 60px 0;
   }
 
+  /* Navigation Mobile */
   .nav-menu {
     display: none;
-    position: absolute;
-    top: 100%;
+    position: fixed;
+    top: 70px;
     left: 0;
     right: 0;
-    background: rgba(15, 23, 42, 0.98);
+    bottom: 0;
+    background: var(--navbar-bg);
     backdrop-filter: blur(20px);
     flex-direction: column;
     padding: 24px;
     gap: 20px;
-    border-bottom: 1px solid var(--dark-border);
+    border-bottom: 1px solid var(--border-color);
+    z-index: 999;
+    overflow-y: auto;
   }
 
   .nav-menu.active {
@@ -1567,6 +1588,22 @@ textarea {
     display: none;
   }
 
+  .nav-actions .nav-link {
+    display: none;
+  }
+
+  /* Navbar container responsive */
+  .navbar .container {
+    padding: 0 16px;
+  }
+
+  /* Hero section responsive */
+  .hero {
+    min-height: auto;
+    padding-top: 100px;
+    padding-bottom: 60px;
+  }
+
   .hero-buttons {
     flex-direction: column;
   }
@@ -1577,31 +1614,145 @@ textarea {
 
   .hero-stats {
     flex-wrap: wrap;
-    gap: 32px;
+    gap: 24px;
   }
 
   .stat-item {
     text-align: center;
-    flex: 1;
+    flex: 1 1 calc(50% - 12px);
     min-width: 120px;
+  }
+
+  .stat-value {
+    font-size: 1.5rem;
   }
 
   .hero-float-card {
     display: none;
   }
 
+  .hero-badge {
+    font-size: 0.75rem;
+    padding: 8px 14px;
+  }
+
+  /* Features grid responsive */
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .feature-card {
+    padding: 24px;
+  }
+
+  /* Steps responsive */
   .steps-container {
     grid-template-columns: 1fr;
-    max-width: 400px;
+    max-width: 100%;
     margin: 0 auto;
+    gap: 20px;
+  }
+
+  .step-number {
+    width: 50px;
+    height: 50px;
+    font-size: 1.25rem;
+  }
+
+  /* Trusted section responsive */
+  .trusted {
+    padding: 40px 0;
+  }
+
+  .trusted-logos {
+    gap: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .trusted-logo {
+    font-size: 1.1rem;
+    flex: 0 1 auto;
+  }
+
+  .trusted-text {
+    font-size: 0.75rem;
+    margin-bottom: 24px;
+  }
+
+  /* Pricing responsive */
+  .pricing-toggle {
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+
+  .pricing-save {
+    width: 100%;
+    text-align: center;
+    margin-top: 8px;
+  }
+
+  .pricing-card {
+    padding: 28px;
+  }
+
+  /* Testimonials responsive */
+  .testimonial-card {
+    padding: 24px;
+  }
+
+  .testimonial-text {
+    font-size: 0.95rem;
+  }
+
+  /* FAQ responsive */
+  .faq-question {
+    padding: 20px;
+  }
+
+  .faq-question h3 {
+    font-size: 1rem;
+    flex: 1;
+    padding-right: 12px;
+  }
+
+  .faq-answer p {
+    padding: 0 20px 20px;
+    font-size: 0.95rem;
+  }
+
+  /* CTA responsive */
+  .cta {
+    padding: 80px 0;
   }
 
   .cta-form {
     flex-direction: column;
+    gap: 12px;
   }
 
   .cta-input {
     max-width: 100%;
+  }
+
+  .cta-description {
+    font-size: 1.1rem;
+    margin-bottom: 32px;
+  }
+
+  .cta-note {
+    font-size: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+  }
+
+  /* Footer responsive */
+  .footer {
+    padding-top: 60px;
   }
 
   .footer-grid {
@@ -1611,6 +1762,23 @@ textarea {
 
   .footer-brand {
     grid-column: span 1;
+    text-align: center;
+  }
+
+  .footer-logo {
+    justify-content: center;
+  }
+
+  .footer-social {
+    justify-content: center;
+  }
+
+  .footer-column {
+    text-align: center;
+  }
+
+  .footer-column h4 {
+    margin-bottom: 16px;
   }
 
   .footer-bottom {
@@ -1618,32 +1786,312 @@ textarea {
     gap: 16px;
     text-align: center;
   }
+
+  .footer-legal {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  /* Section headers responsive */
+  .section-header {
+    margin-bottom: 40px;
+  }
+
+  .section-badge {
+    font-size: 0.75rem;
+    padding: 6px 12px;
+  }
+
+  .section-subtitle {
+    font-size: 1rem;
+  }
+
+  /* Buttons responsive */
+  .btn-lg {
+    padding: 14px 28px;
+    font-size: 1rem;
+  }
 }
 
+/* Mobile Phones (480px) */
 @media (max-width: 480px) {
   .container {
     padding: 0 16px;
   }
 
   .section-title {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
+    line-height: 1.3;
   }
 
   .hero-title {
-    font-size: 2rem;
+    font-size: 1.75rem;
+    line-height: 1.2;
   }
 
   .hero-description {
-    font-size: 1rem;
+    font-size: 0.95rem;
   }
 
+  .hero-badge {
+    font-size: 0.7rem;
+    padding: 6px 12px;
+  }
+
+  .hero-badge::before {
+    width: 6px;
+    height: 6px;
+  }
+
+  /* Stats responsive */
+  .hero-stats {
+    gap: 16px;
+  }
+
+  .stat-item {
+    flex: 1 1 100%;
+  }
+
+  .stat-value {
+    font-size: 1.25rem;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+  }
+
+  /* Pricing responsive */
   .pricing-amount {
     font-size: 2.5rem;
+  }
+
+  .pricing-currency {
+    font-size: 1.25rem;
+  }
+
+  .pricing-features li {
+    font-size: 0.875rem;
+    padding: 10px 0;
   }
 
   .feature-card,
   .pricing-card,
   .testimonial-card {
-    padding: 24px;
+    padding: 20px;
+  }
+
+  .pricing-card {
+    padding: 24px 20px;
+  }
+
+  .pricing-header {
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+  }
+
+  /* Feature icons responsive */
+  .feature-icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 16px;
+  }
+
+  .feature-card h3 {
+    font-size: 1.1rem;
+  }
+
+  .feature-card p {
+    font-size: 0.875rem;
+  }
+
+  /* Steps responsive */
+  .step-card h3 {
+    font-size: 1.1rem;
+  }
+
+  .step-card p {
+    font-size: 0.875rem;
+  }
+
+  /* CTA responsive */
+  .cta-title {
+    font-size: 1.5rem;
+  }
+
+  .cta-description {
+    font-size: 1rem;
+  }
+
+  /* FAQ responsive */
+  .faq-question h3 {
+    font-size: 0.95rem;
+  }
+
+  .faq-answer p {
+    font-size: 0.875rem;
+  }
+
+  /* Testimonials responsive */
+  .testimonial-text {
+    font-size: 0.875rem;
+    margin-bottom: 20px;
+  }
+
+  .testimonial-avatar {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+
+  .testimonial-info h4 {
+    font-size: 0.95rem;
+  }
+
+  .testimonial-info p {
+    font-size: 0.75rem;
+  }
+
+  /* Trusted section responsive */
+  .trusted-logos {
+    gap: 20px;
+  }
+
+  .trusted-logo {
+    font-size: 0.9rem;
+  }
+
+  /* Buttons responsive */
+  .btn {
+    padding: 12px 20px;
+    font-size: 0.875rem;
+  }
+
+  .btn-lg {
+    padding: 12px 24px;
+    font-size: 0.95rem;
+  }
+
+  .btn-sm {
+    padding: 8px 16px;
+    font-size: 0.8rem;
+  }
+
+  /* Footer responsive */
+  .footer-description {
+    font-size: 0.875rem;
+  }
+
+  .footer-column h4 {
+    font-size: 0.95rem;
+  }
+
+  .footer-links a {
+    font-size: 0.875rem;
+  }
+
+  .footer-copyright {
+    font-size: 0.75rem;
+  }
+
+  /* Theme toggle responsive */
+  .theme-toggle {
+    width: 40px;
+    height: 40px;
+  }
+
+  .theme-toggle svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* Pricing toggle responsive */
+  .toggle-switch {
+    width: 50px;
+    height: 28px;
+  }
+
+  .toggle-switch::after {
+    width: 20px;
+    height: 20px;
+  }
+
+  .toggle-switch.annual::after {
+    left: calc(100% - 24px);
+  }
+}
+
+/* Very Small Screens (360px) */
+@media (max-width: 360px) {
+  .container {
+    padding: 0 12px;
+  }
+
+  .hero-title {
+    font-size: 1.5rem;
+  }
+
+  .section-title {
+    font-size: 1.35rem;
+  }
+
+  .pricing-amount {
+    font-size: 2rem;
+  }
+
+  .nav-logo span {
+    font-size: 1.25rem;
+  }
+
+  .nav-logo svg {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* Landscape orientation adjustments */
+@media (max-height: 500px) and (orientation: landscape) {
+  .hero {
+    min-height: auto;
+    padding: 100px 0 40px;
+  }
+
+  .nav-menu {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 16px;
+    gap: 16px;
+    position: fixed;
+    height: auto;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+}
+
+/* Print styles */
+@media print {
+
+  .navbar,
+  .nav-toggle,
+  .theme-toggle,
+  .cta-form,
+  .footer-social,
+  .bg-particles {
+    display: none !important;
+  }
+
+  .hero {
+    min-height: auto;
+    padding: 40px 0;
+  }
+
+  body {
+    background: white;
+    color: black;
+  }
+
+  .section {
+    page-break-inside: avoid;
   }
 }
