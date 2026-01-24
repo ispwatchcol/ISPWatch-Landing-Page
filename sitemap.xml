@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <!-- Homepage -->
+  <url>
+    <loc>https://ispwatch.io/</loc>
+    <lastmod>2026-01-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://ispwatch.io/" />
+    <xhtml:link rel="alternate" hreflang="es-MX" href="https://ispwatch.io/" />
+    <xhtml:link rel="alternate" hreflang="es-AR" href="https://ispwatch.io/" />
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://ispwatch.io/" />
+    <xhtml:link rel="alternate" hreflang="es-CL" href="https://ispwatch.io/" />
+  </url>
+
+  <!-- Pricing Page -->
+  <url>
+    <loc>https://ispwatch.io/precios.html</loc>
+    <lastmod>2026-01-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://ispwatch.io/precios.html" />
+    <xhtml:link rel="alternate" hreflang="es-MX" href="https://ispwatch.io/precios.html" />
+    <xhtml:link rel="alternate" hreflang="es-AR" href="https://ispwatch.io/precios.html" />
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://ispwatch.io/precios.html" />
+    <xhtml:link rel="alternate" hreflang="es-CL" href="https://ispwatch.io/precios.html" />
+  </url>
+
+  <!-- Features Page -->
+  <url>
+    <loc>https://ispwatch.io/caracteristicas.html</loc>
+    <lastmod>2026-01-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://ispwatch.io/caracteristicas.html" />
+    <xhtml:link rel="alternate" hreflang="es-MX" href="https://ispwatch.io/caracteristicas.html" />
+    <xhtml:link rel="alternate" hreflang="es-AR" href="https://ispwatch.io/caracteristicas.html" />
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://ispwatch.io/caracteristicas.html" />
+    <xhtml:link rel="alternate" hreflang="es-CL" href="https://ispwatch.io/caracteristicas.html" />
+  </url>
+
+  <!-- FAQ Page -->
+  <url>
+    <loc>https://ispwatch.io/faq.html</loc>
+    <lastmod>2026-01-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://ispwatch.io/faq.html" />
+    <xhtml:link rel="alternate" hreflang="es-MX" href="https://ispwatch.io/faq.html" />
+    <xhtml:link rel="alternate" hreflang="es-AR" href="https://ispwatch.io/faq.html" />
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://ispwatch.io/faq.html" />
+    <xhtml:link rel="alternate" hreflang="es-CL" href="https://ispwatch.io/faq.html" />
+  </url>
+
+</urlset>
