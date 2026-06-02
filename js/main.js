@@ -130,42 +130,36 @@ function initPricingToggle() {
   const annualLabel = document.querySelector('.annual-label');
   const prices = document.querySelectorAll('.pricing-amount');
 
-  // Monthly and annual prices
-  const pricesData = {
-    starter: { monthly: 29, annual: 24 },
-    professional: { monthly: 79, annual: 66 },
-    enterprise: { monthly: 149, annual: 124 }
-  };
+  if (!toggle) return;
 
-  if (toggle) {
-    toggle.addEventListener('click', () => {
-      toggle.classList.toggle('annual');
-      const isAnnual = toggle.classList.contains('annual');
+  toggle.addEventListener('click', () => {
+    toggle.classList.toggle('annual');
+    const isAnnual = toggle.classList.contains('annual');
 
-      // Update labels
-      if (monthlyLabel && annualLabel) {
-        monthlyLabel.classList.toggle('active', !isAnnual);
-        annualLabel.classList.toggle('active', isAnnual);
-      }
+    // Update labels
+    if (monthlyLabel && annualLabel) {
+      monthlyLabel.classList.toggle('active', !isAnnual);
+      annualLabel.classList.toggle('active', isAnnual);
+    }
 
-      // Update prices with animation
-      prices.forEach((price, index) => {
-        const plans = ['starter', 'professional', 'enterprise'];
-        const plan = plans[index];
-        const newPrice = isAnnual ? pricesData[plan].annual : pricesData[plan].monthly;
+    // Update prices with animation, reading values from data attributes.
+    // Plans without data-monthly/data-annual (e.g. the free Básico plan) are left untouched.
+    prices.forEach((price) => {
+      const { monthly, annual } = price.dataset;
+      if (monthly === undefined || annual === undefined) return;
 
-        // Animate price change
-        price.style.transform = 'scale(0.8)';
-        price.style.opacity = '0';
+      const newPrice = isAnnual ? annual : monthly;
 
-        setTimeout(() => {
-          price.textContent = newPrice;
-          price.style.transform = 'scale(1)';
-          price.style.opacity = '1';
-        }, 150);
-      });
+      price.style.transform = 'scale(0.8)';
+      price.style.opacity = '0';
+
+      setTimeout(() => {
+        price.textContent = newPrice;
+        price.style.transform = 'scale(1)';
+        price.style.opacity = '1';
+      }, 150);
     });
-  }
+  });
 }
 
 /* ========== FAQ Accordion ========== */

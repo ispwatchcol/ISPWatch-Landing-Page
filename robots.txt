@@ -5,7 +5,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://ispwatch.io/sitemap.xml
+Sitemap: https://ispwatch-crm.com/sitemap.xml
 
 # Crawl-delay (opcional, ajustar según necesidad)
 # Crawl-delay: 1

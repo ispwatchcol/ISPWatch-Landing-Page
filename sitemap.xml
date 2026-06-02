@@ -4,54 +4,54 @@
   
   <!-- Homepage -->
   <url>
-    <loc>https://ispwatch.io/</loc>
-    <lastmod>2026-01-22</lastmod>
+    <loc>https://ispwatch-crm.com/</loc>
+    <lastmod>2026-06-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://ispwatch.io/" />
-    <xhtml:link rel="alternate" hreflang="es-MX" href="https://ispwatch.io/" />
-    <xhtml:link rel="alternate" hreflang="es-AR" href="https://ispwatch.io/" />
-    <xhtml:link rel="alternate" hreflang="es-CO" href="https://ispwatch.io/" />
-    <xhtml:link rel="alternate" hreflang="es-CL" href="https://ispwatch.io/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://ispwatch-crm.com/" />
+    <xhtml:link rel="alternate" hreflang="es-MX" href="https://ispwatch-crm.com/" />
+    <xhtml:link rel="alternate" hreflang="es-AR" href="https://ispwatch-crm.com/" />
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://ispwatch-crm.com/" />
+    <xhtml:link rel="alternate" hreflang="es-CL" href="https://ispwatch-crm.com/" />
   </url>
 
   <!-- Pricing Page -->
   <url>
-    <loc>https://ispwatch.io/precios.html</loc>
-    <lastmod>2026-01-22</lastmod>
+    <loc>https://ispwatch-crm.com/precios.html</loc>
+    <lastmod>2026-06-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://ispwatch.io/precios.html" />
-    <xhtml:link rel="alternate" hreflang="es-MX" href="https://ispwatch.io/precios.html" />
-    <xhtml:link rel="alternate" hreflang="es-AR" href="https://ispwatch.io/precios.html" />
-    <xhtml:link rel="alternate" hreflang="es-CO" href="https://ispwatch.io/precios.html" />
-    <xhtml:link rel="alternate" hreflang="es-CL" href="https://ispwatch.io/precios.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://ispwatch-crm.com/precios.html" />
+    <xhtml:link rel="alternate" hreflang="es-MX" href="https://ispwatch-crm.com/precios.html" />
+    <xhtml:link rel="alternate" hreflang="es-AR" href="https://ispwatch-crm.com/precios.html" />
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://ispwatch-crm.com/precios.html" />
+    <xhtml:link rel="alternate" hreflang="es-CL" href="https://ispwatch-crm.com/precios.html" />
   </url>
 
   <!-- Features Page -->
   <url>
-    <loc>https://ispwatch.io/caracteristicas.html</loc>
-    <lastmod>2026-01-22</lastmod>
+    <loc>https://ispwatch-crm.com/caracteristicas.html</loc>
+    <lastmod>2026-06-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://ispwatch.io/caracteristicas.html" />
-    <xhtml:link rel="alternate" hreflang="es-MX" href="https://ispwatch.io/caracteristicas.html" />
-    <xhtml:link rel="alternate" hreflang="es-AR" href="https://ispwatch.io/caracteristicas.html" />
-    <xhtml:link rel="alternate" hreflang="es-CO" href="https://ispwatch.io/caracteristicas.html" />
-    <xhtml:link rel="alternate" hreflang="es-CL" href="https://ispwatch.io/caracteristicas.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://ispwatch-crm.com/caracteristicas.html" />
+    <xhtml:link rel="alternate" hreflang="es-MX" href="https://ispwatch-crm.com/caracteristicas.html" />
+    <xhtml:link rel="alternate" hreflang="es-AR" href="https://ispwatch-crm.com/caracteristicas.html" />
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://ispwatch-crm.com/caracteristicas.html" />
+    <xhtml:link rel="alternate" hreflang="es-CL" href="https://ispwatch-crm.com/caracteristicas.html" />
   </url>
 
   <!-- FAQ Page -->
   <url>
-    <loc>https://ispwatch.io/faq.html</loc>
-    <lastmod>2026-01-22</lastmod>
+    <loc>https://ispwatch-crm.com/faq.html</loc>
+    <lastmod>2026-06-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://ispwatch.io/faq.html" />
-    <xhtml:link rel="alternate" hreflang="es-MX" href="https://ispwatch.io/faq.html" />
-    <xhtml:link rel="alternate" hreflang="es-AR" href="https://ispwatch.io/faq.html" />
-    <xhtml:link rel="alternate" hreflang="es-CO" href="https://ispwatch.io/faq.html" />
-    <xhtml:link rel="alternate" hreflang="es-CL" href="https://ispwatch.io/faq.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://ispwatch-crm.com/faq.html" />
+    <xhtml:link rel="alternate" hreflang="es-MX" href="https://ispwatch-crm.com/faq.html" />
+    <xhtml:link rel="alternate" hreflang="es-AR" href="https://ispwatch-crm.com/faq.html" />
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://ispwatch-crm.com/faq.html" />
+    <xhtml:link rel="alternate" hreflang="es-CL" href="https://ispwatch-crm.com/faq.html" />
   </url>
 
 </urlset>
