@@ -343,9 +343,11 @@ textarea {
   font-weight: 700;
 }
 
-.nav-logo svg {
+.nav-logo svg,
+.nav-logo img {
   width: 40px;
   height: 40px;
+  display: block;
 }
 
 .nav-logo span {
@@ -865,8 +867,8 @@ textarea {
 
 .pricing-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
   align-items: stretch;
 }
 
@@ -874,7 +876,7 @@ textarea {
   background: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-xl);
-  padding: 40px;
+  padding: 32px 26px;
   position: relative;
   transition: var(--transition-base);
 }
@@ -908,6 +910,10 @@ textarea {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
+}
+
+.pricing-badge-free {
+  background: var(--secondary);
 }
 
 .pricing-header {
@@ -1250,9 +1256,11 @@ textarea {
   margin-bottom: 20px;
 }
 
-.footer-logo svg {
+.footer-logo svg,
+.footer-logo img {
   width: 36px;
   height: 36px;
+  display: block;
 }
 
 .footer-logo span {
@@ -1508,14 +1516,13 @@ textarea {
   }
 
   .pricing-grid {
-    grid-template-columns: 1fr;
-    max-width: 450px;
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 720px;
     margin: 0 auto;
   }
 
   .pricing-card.featured {
     transform: none;
-    order: -1;
   }
 
   .pricing-card.featured:hover {
@@ -1556,6 +1563,15 @@ textarea {
 @media (max-width: 768px) {
   :root {
     --section-padding: 60px 0;
+  }
+
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    max-width: 450px;
+  }
+
+  .pricing-card.featured {
+    order: -1;
   }
 
   /* Navigation Mobile */
@@ -2043,7 +2059,8 @@ textarea {
     font-size: 1.25rem;
   }
 
-  .nav-logo svg {
+  .nav-logo svg,
+  .nav-logo img {
     width: 32px;
     height: 32px;
   }
