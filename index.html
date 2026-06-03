@@ -162,12 +162,6 @@
       "highPrice": "149",
       "offerCount": "4"
     },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.9",
-      "ratingCount": "127",
-      "bestRating": "5"
-    },
     "featureList": [
       "Gestión de clientes ISP",
       "Control de direcciones IP",
@@ -245,6 +239,10 @@
     "@type": "Product",
     "name": "ISPWatch Básico",
     "description": "Plan Básico gratis para siempre: gestiona hasta 30 clientes sin costo ni tarjeta de crédito",
+    "image": [
+      "https://ispwatch-crm.com/images/logo.png",
+      "https://ispwatch-crm.com/images/dashboard.png"
+    ],
     "brand": {
       "@type": "Brand",
       "name": "ISPWatch"
@@ -265,6 +263,10 @@
     "@type": "Product",
     "name": "ISPWatch Starter",
     "description": "Plan Starter ideal para ISPs pequeños que inician",
+    "image": [
+      "https://ispwatch-crm.com/images/logo.png",
+      "https://ispwatch-crm.com/images/dashboard.png"
+    ],
     "brand": {
       "@type": "Brand",
       "name": "ISPWatch"
@@ -286,6 +288,10 @@
     "@type": "Product",
     "name": "ISPWatch Professional",
     "description": "Plan Professional para ISPs en crecimiento",
+    "image": [
+      "https://ispwatch-crm.com/images/logo.png",
+      "https://ispwatch-crm.com/images/dashboard.png"
+    ],
     "brand": {
       "@type": "Brand",
       "name": "ISPWatch"
@@ -307,6 +313,10 @@
     "@type": "Product",
     "name": "ISPWatch Enterprise",
     "description": "Plan Enterprise para grandes operadores",
+    "image": [
+      "https://ispwatch-crm.com/images/logo.png",
+      "https://ispwatch-crm.com/images/dashboard.png"
+    ],
     "brand": {
       "@type": "Brand",
       "name": "ISPWatch"
@@ -321,6 +331,49 @@
     }
   }
   </script>
+
+  <!--
+    ============================================================
+    PLANTILLA DE RESEÑAS (Opción C — plataforma externa)
+    ESTADO: INACTIVA. No publicar hasta tener reseñas REALES y
+    visibles provenientes de la plataforma elegida (Trustpilot,
+    Capterra, G2 o Google Business Profile).
+
+    Para activar:
+      1) Descomenta este bloque.
+      2) Sustituye ratingValue / reviewCount por el promedio y el
+         total REALES que reporta la plataforma.
+      3) Añade un objeto dentro de "review" por cada reseña real
+         que esté VISIBLE en la página (requisito de Google).
+      4) Quita hidden / aria-hidden de la seccion #reviews y deja
+         el widget de la plataforma renderizando esas reseñas.
+    ============================================================
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "ISPWatch",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web Browser",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "REEMPLAZAR_PROMEDIO_REAL",
+      "reviewCount": "REEMPLAZAR_TOTAL_REAL",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "NOMBRE_REAL" },
+        "datePublished": "AAAA-MM-DD",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5", "worstRating": "1" },
+        "reviewBody": "TEXTO_REAL_DE_LA_RESEÑA"
+      }
+    ]
+  }
+  </script>
+  -->
 </head>
 
 <body>
@@ -1060,6 +1113,37 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- Reseñas (Opción C — widget de plataforma externa). OCULTO hasta tener reseñas reales. -->
+  <section class="reviews section" id="reviews" hidden aria-hidden="true">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-badge">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+          </svg>
+          Reseñas verificadas
+        </span>
+        <h2 class="section-title">Reseñas de clientes reales</h2>
+        <p class="section-subtitle">
+          Opiniones verificadas por plataformas independientes.
+        </p>
+      </div>
+
+      <!--
+        COMPLEMENTO PENDIENTE: pega aquí el widget de la plataforma elegida.
+        Plataformas sugeridas (SaaS B2B): Capterra, G2, Trustpilot o Google Business Profile.
+
+        Pasos para activar:
+          1) Inserta el snippet del widget dentro de #reviews-widget-container.
+          2) Si la plataforma pide un <script>, colócalo justo antes de </body>
+             (no aquí) o donde indique su documentación, para no bloquear el render.
+          3) Quita los atributos hidden y aria-hidden de <section id="reviews">.
+          4) Activa el bloque JSON-LD de reseñas del <head> con datos REALES.
+      -->
+      <div id="reviews-widget-container"></div>
     </div>
   </section>
 
