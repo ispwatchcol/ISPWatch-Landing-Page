@@ -3,6 +3,10 @@
    Interactivity, animations, and effects
 ======================================== */
 
+// Respect users who prefer reduced motion / coarse pointers (touch)
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const hasFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
 document.addEventListener('DOMContentLoaded', () => {
   // Initialize all components
   initThemeToggle();
@@ -13,6 +17,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initSmoothScroll();
   initCounterAnimation();
   initParticles();
+  initSpotlight();
+  initMagnetic();
+  initHeroTilt();
 });
 
 /* ========== Theme Toggle ========== */
@@ -106,49 +113,48 @@ function initNavbar() {
 /* ========== Scroll Reveal ========== */
 function initScrollReveal() {
   const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+  if (!reveals.length) return;
 
-  const revealOnScroll = () => {
-    reveals.forEach(element => {
-      const windowHeight = window.innerHeight;
-      const elementTop = element.getBoundingClientRect().top;
-      const revealPoint = 150;
+  // Reduced motion or no observer support: reveal everything up front.
+  if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+    reveals.forEach(el => el.classList.add('active'));
+    return;
+  }
 
-      if (elementTop < windowHeight - revealPoint) {
-        element.classList.add('active');
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+        obs.unobserve(entry.target); // reveal once, then stop watching
       }
     });
-  };
+  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
 
-  window.addEventListener('scroll', revealOnScroll);
-  revealOnScroll(); // Initial check
+  reveals.forEach(el => observer.observe(el));
 }
 
-/* ========== Pricing Toggle ========== */
+/* ========== Pricing Toggle (billing cycle) ========== */
 function initPricingToggle() {
-  const toggle = document.querySelector('.toggle-switch');
-  const monthlyLabel = document.querySelector('.monthly-label');
-  const annualLabel = document.querySelector('.annual-label');
+  const buttons = document.querySelectorAll('.cycle-btn');
   const prices = document.querySelectorAll('.pricing-amount');
+  const note = document.getElementById('billing-note');
 
-  if (!toggle) return;
+  if (!buttons.length) return;
 
-  toggle.addEventListener('click', () => {
-    toggle.classList.toggle('annual');
-    const isAnnual = toggle.classList.contains('annual');
+  // Displayed price is the effective monthly rate for each billing cycle.
+  const notes = {
+    monthly: 'Facturación mensual · cancela cuando quieras',
+    quarterly: 'Precio por mes facturado cada 3 meses · ahorra 15%',
+    annual: 'Precio por mes facturado de forma anual · ahorra 25%',
+  };
 
-    // Update labels
-    if (monthlyLabel && annualLabel) {
-      monthlyLabel.classList.toggle('active', !isAnnual);
-      annualLabel.classList.toggle('active', isAnnual);
-    }
+  const applyCycle = (cycle) => {
+    if (note && notes[cycle]) note.textContent = notes[cycle];
 
-    // Update prices with animation, reading values from data attributes.
-    // Plans without data-monthly/data-annual (e.g. the free Básico plan) are left untouched.
+    // Plans without data-* for paid cycles (e.g. the free Gratis plan) are left untouched.
     prices.forEach((price) => {
-      const { monthly, annual } = price.dataset;
-      if (monthly === undefined || annual === undefined) return;
-
-      const newPrice = isAnnual ? annual : monthly;
+      const newPrice = price.dataset[cycle];
+      if (newPrice === undefined) return;
 
       price.style.transform = 'scale(0.8)';
       price.style.opacity = '0';
@@ -158,6 +164,17 @@ function initPricingToggle() {
         price.style.transform = 'scale(1)';
         price.style.opacity = '1';
       }, 150);
+    });
+  };
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      buttons.forEach((b) => {
+        const isActive = b === btn;
+        b.classList.toggle('active', isActive);
+        b.setAttribute('aria-pressed', String(isActive));
+      });
+      applyCycle(btn.dataset.cycle);
     });
   });
 }
@@ -189,17 +206,32 @@ function initFAQ() {
 function initSmoothScroll() {
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
+      const href = this.getAttribute('href');
+
+      // Bare "#" links (logo, placeholder footer links): scroll to top.
+      // Previously this threw a SyntaxError on querySelector('#').
+      if (!href || href === '#') {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+        return;
+      }
+
+      let target;
+      try {
+        target = document.querySelector(href);
+      } catch (_) {
+        return; // Not a valid selector — let the browser handle the link.
+      }
 
       if (target) {
+        e.preventDefault();
         const headerOffset = 100;
         const elementPosition = target.getBoundingClientRect().top;
         const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
         window.scrollTo({
           top: offsetPosition,
-          behavior: 'smooth'
+          behavior: prefersReducedMotion ? 'auto' : 'smooth'
         });
       }
     });
@@ -253,12 +285,88 @@ function initParticles() {
   const container = document.querySelector('.bg-particles');
   if (!container) return;
 
+  // Skip the floating dots when motion is reduced.
+  if (prefersReducedMotion) return;
+
   // Create particles
   for (let i = 0; i < 10; i++) {
     const particle = document.createElement('div');
     particle.className = 'particle';
     container.appendChild(particle);
   }
+}
+
+/* ========== Cursor Spotlight (feature cards) ========== */
+function initSpotlight() {
+  if (!hasFinePointer) return;
+
+  document.querySelectorAll('.feature-card').forEach(card => {
+    card.addEventListener('pointermove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      card.style.setProperty('--mx', `${x}%`);
+      card.style.setProperty('--my', `${y}%`);
+    });
+  });
+}
+
+/* ========== Magnetic Buttons (primary CTAs) ========== */
+function initMagnetic() {
+  if (!hasFinePointer || prefersReducedMotion) return;
+
+  const strength = 0.28;
+  const max = 7; // px
+
+  document.querySelectorAll('.btn-primary').forEach(btn => {
+    btn.addEventListener('pointerenter', () => {
+      btn.style.transition = 'transform 180ms cubic-bezier(0.25, 1, 0.5, 1)';
+    });
+
+    btn.addEventListener('pointermove', (e) => {
+      const rect = btn.getBoundingClientRect();
+      const mx = e.clientX - (rect.left + rect.width / 2);
+      const my = e.clientY - (rect.top + rect.height / 2);
+      const tx = Math.max(-max, Math.min(max, mx * strength));
+      const ty = Math.max(-max, Math.min(max, my * strength));
+      btn.style.transform = `translate(${tx}px, ${ty}px)`;
+    });
+
+    btn.addEventListener('pointerleave', () => {
+      // Clear inline styles so the CSS spring eases the button home.
+      btn.style.transition = '';
+      btn.style.transform = '';
+    });
+  });
+}
+
+/* ========== Hero App-Window Tilt (parallax) ========== */
+function initHeroTilt() {
+  if (!hasFinePointer || prefersReducedMotion) return;
+
+  const hero = document.getElementById('hero');
+  const win = document.getElementById('appWindow');
+  if (!hero || !win) return;
+
+  let raf = null;
+
+  hero.addEventListener('pointermove', (e) => {
+    const rect = hero.getBoundingClientRect();
+    const px = (e.clientX - rect.left) / rect.width - 0.5;  // -0.5 .. 0.5
+    const py = (e.clientY - rect.top) / rect.height - 0.5;
+
+    if (raf) cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(() => {
+      const ry = -7 + px * 6;  // base -7deg, ±3deg
+      const rx = 3 - py * 6;   // base  3deg, ±3deg
+      win.style.transform = `perspective(1600px) rotateY(${ry}deg) rotateX(${rx}deg)`;
+    });
+  });
+
+  hero.addEventListener('pointerleave', () => {
+    if (raf) cancelAnimationFrame(raf);
+    win.style.transform = ''; // settle back to the CSS resting pose
+  });
 }
 
 /* ========== Utility Functions ========== */

@@ -7,7 +7,7 @@
 .reveal {
     opacity: 0;
     transform: translateY(40px);
-    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
 }
 
 .reveal.active {
@@ -18,7 +18,7 @@
 .reveal-left {
     opacity: 0;
     transform: translateX(-60px);
-    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
 }
 
 .reveal-left.active {
@@ -29,7 +29,7 @@
 .reveal-right {
     opacity: 0;
     transform: translateX(60px);
-    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
 }
 
 .reveal-right.active {
@@ -40,7 +40,7 @@
 .reveal-scale {
     opacity: 0;
     transform: scale(0.9);
-    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
 }
 
 .reveal-scale.active {
@@ -328,9 +328,9 @@
 /* ========== Loading Animations ========== */
 .skeleton {
     background: linear-gradient(90deg,
-            var(--dark-lighter) 25%,
-            var(--dark-card) 50%,
-            var(--dark-lighter) 75%);
+            var(--bg-secondary) 25%,
+            var(--bg-card) 50%,
+            var(--bg-secondary) 75%);
     background-size: 200% 100%;
     animation: shimmer 1.5s infinite;
     border-radius: var(--radius-md);
