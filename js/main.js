@@ -446,94 +446,7 @@ ctaForms.forEach(ctaForm => {
       // Get the page name
       const pageName = document.title || 'ISPWatch Landing Page';
 
-      // Send email via FormSubmit.co
-      const htmlBody = `
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nueva Solicitud de Acceso - ISPWatch</title>
-</head>
-<body style="margin:0;padding:0;background-color:#0f172a;font-family:'Segoe UI',Arial,sans-serif;">
-  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#0f172a;padding:40px 20px;">
-    <tr>
-      <td align="center">
-        <table width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%;">
-
-          <!-- Header -->
-          <tr>
-            <td style="background:linear-gradient(135deg,#6366f1 0%,#8b5cf6 50%,#06b6d4 100%);border-radius:16px 16px 0 0;padding:40px 40px 32px;text-align:center;">
-              <div style="display:inline-block;background:rgba(255,255,255,0.15);border-radius:12px;padding:10px 20px;margin-bottom:20px;">
-                <span style="color:#ffffff;font-size:20px;font-weight:800;letter-spacing:1px;">📡 ISPWatch</span>
-              </div>
-              <h1 style="color:#ffffff;font-size:26px;font-weight:700;margin:0 0 8px 0;line-height:1.3;">🚀 Nueva Solicitud de Acceso</h1>
-              <p style="color:rgba(255,255,255,0.8);font-size:15px;margin:0;">Un usuario quiere probar ISPWatch CRM</p>
-            </td>
-          </tr>
-
-          <!-- Body -->
-          <tr>
-            <td style="background:#1e293b;padding:32px 40px;">
-
-              <!-- Alert banner -->
-              <div style="background:linear-gradient(135deg,rgba(99,102,241,0.2),rgba(6,182,212,0.2));border:1px solid rgba(99,102,241,0.4);border-radius:10px;padding:16px 20px;margin-bottom:28px;text-align:center;">
-                <p style="color:#a5b4fc;font-size:14px;font-weight:600;margin:0;text-transform:uppercase;letter-spacing:1px;">⚡ Acción Requerida</p>
-                <p style="color:#e2e8f0;font-size:13px;margin:6px 0 0 0;">Contactar al usuario dentro de las próximas <strong style="color:#818cf8;">24 horas</strong></p>
-              </div>
-
-              <!-- Email info card -->
-              <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:24px;">
-                <tr>
-                  <td style="background:#0f172a;border:1px solid rgba(99,102,241,0.3);border-radius:12px;padding:24px;">
-                    <p style="color:#94a3b8;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;margin:0 0 8px 0;">📧 Correo del Usuario</p>
-                    <p style="color:#6366f1;font-size:20px;font-weight:700;margin:0;word-break:break-all;">${email}</p>
-                  </td>
-                </tr>
-              </table>
-
-              <!-- Details grid -->
-              <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:24px;">
-                <tr>
-                  <td width="48%" style="background:#0f172a;border:1px solid rgba(148,163,184,0.15);border-radius:12px;padding:20px;vertical-align:top;">
-                    <p style="color:#94a3b8;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;margin:0 0 6px 0;">📍 Origen</p>
-                    <p style="color:#e2e8f0;font-size:14px;font-weight:600;margin:0;">${pageName}</p>
-                  </td>
-                  <td width="4%"></td>
-                  <td width="48%" style="background:#0f172a;border:1px solid rgba(148,163,184,0.15);border-radius:12px;padding:20px;vertical-align:top;">
-                    <p style="color:#94a3b8;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;margin:0 0 6px 0;">📅 Fecha y Hora</p>
-                    <p style="color:#e2e8f0;font-size:14px;font-weight:600;margin:0;">${dateStr}</p>
-                  </td>
-                </tr>
-              </table>
-
-              <!-- CTA button -->
-              <div style="text-align:center;margin-top:28px;">
-                <a href="mailto:${email}" style="display:inline-block;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#ffffff;text-decoration:none;font-size:15px;font-weight:700;padding:14px 36px;border-radius:50px;letter-spacing:0.5px;">📨 Responder al Usuario</a>
-              </div>
-
-            </td>
-          </tr>
-
-          <!-- Footer -->
-          <tr>
-            <td style="background:#0f172a;border-radius:0 0 16px 16px;padding:24px 40px;text-align:center;border-top:1px solid rgba(99,102,241,0.2);">
-              <p style="color:#475569;font-size:13px;margin:0 0 8px 0;">Este correo fue generado automáticamente por el sistema ISPWatch.</p>
-              <p style="margin:0;">
-                <a href="https://ispwatch-crm.app" style="color:#6366f1;text-decoration:none;font-size:13px;font-weight:600;">ispwatch-crm.app</a>
-                <span style="color:#334155;margin:0 8px;">·</span>
-                <a href="mailto:info@ispwatch-crm.com" style="color:#6366f1;text-decoration:none;font-size:13px;">info@ispwatch-crm.com</a>
-              </p>
-            </td>
-          </tr>
-
-        </table>
-      </td>
-    </tr>
-  </table>
-</body>
-</html>
-      `;
+      // Notificacion enviada como tabla limpia via FormSubmit (campos en el fetch).
 
       const response = await fetch(EMAIL_ENDPOINT, {
         method: 'POST',
@@ -542,11 +455,13 @@ ctaForms.forEach(ctaForm => {
           'Accept': 'application/json'
         },
         body: JSON.stringify({
-          _subject: '🚀 Nueva Solicitud de Acceso - ISPWatch CRM',
+          _subject: '🚀 Nueva solicitud de acceso - ISPWatch CRM',
           _template: 'table',
-          email: email,
           _captcha: 'false',
-          message: htmlBody
+          email: email,
+          Solicitud: 'Un cliente quiere probar ISPWatch CRM y pide que lo contacten.',
+          Origen: pageName,
+          Fecha: dateStr
         })
       });
 
