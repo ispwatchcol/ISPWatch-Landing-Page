@@ -3,6 +3,10 @@
    Interactivity, animations, and effects
 ======================================== */
 
+// Respect users who prefer reduced motion / coarse pointers (touch)
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const hasFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
 document.addEventListener('DOMContentLoaded', () => {
   // Initialize all components
   initThemeToggle();
@@ -13,6 +17,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initSmoothScroll();
   initCounterAnimation();
   initParticles();
+  initSpotlight();
+  initMagnetic();
+  initHeroTilt();
 });
 
 /* ========== Theme Toggle ========== */
@@ -106,49 +113,48 @@ function initNavbar() {
 /* ========== Scroll Reveal ========== */
 function initScrollReveal() {
   const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+  if (!reveals.length) return;
 
-  const revealOnScroll = () => {
-    reveals.forEach(element => {
-      const windowHeight = window.innerHeight;
-      const elementTop = element.getBoundingClientRect().top;
-      const revealPoint = 150;
+  // Reduced motion or no observer support: reveal everything up front.
+  if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+    reveals.forEach(el => el.classList.add('active'));
+    return;
+  }
 
-      if (elementTop < windowHeight - revealPoint) {
-        element.classList.add('active');
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+        obs.unobserve(entry.target); // reveal once, then stop watching
       }
     });
-  };
+  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
 
-  window.addEventListener('scroll', revealOnScroll);
-  revealOnScroll(); // Initial check
+  reveals.forEach(el => observer.observe(el));
 }
 
-/* ========== Pricing Toggle ========== */
+/* ========== Pricing Toggle (billing cycle) ========== */
 function initPricingToggle() {
-  const toggle = document.querySelector('.toggle-switch');
-  const monthlyLabel = document.querySelector('.monthly-label');
-  const annualLabel = document.querySelector('.annual-label');
+  const buttons = document.querySelectorAll('.cycle-btn');
   const prices = document.querySelectorAll('.pricing-amount');
+  const note = document.getElementById('billing-note');
 
-  if (!toggle) return;
+  if (!buttons.length) return;
 
-  toggle.addEventListener('click', () => {
-    toggle.classList.toggle('annual');
-    const isAnnual = toggle.classList.contains('annual');
+  // Displayed price is the effective monthly rate for each billing cycle.
+  const notes = {
+    monthly: 'Facturación mensual · cancela cuando quieras',
+    quarterly: 'Precio por mes facturado cada 3 meses · ahorra 15%',
+    annual: 'Precio por mes facturado de forma anual · ahorra 25%',
+  };
 
-    // Update labels
-    if (monthlyLabel && annualLabel) {
-      monthlyLabel.classList.toggle('active', !isAnnual);
-      annualLabel.classList.toggle('active', isAnnual);
-    }
+  const applyCycle = (cycle) => {
+    if (note && notes[cycle]) note.textContent = notes[cycle];
 
-    // Update prices with animation, reading values from data attributes.
-    // Plans without data-monthly/data-annual (e.g. the free Básico plan) are left untouched.
+    // Plans without data-* for paid cycles (e.g. the free Gratis plan) are left untouched.
     prices.forEach((price) => {
-      const { monthly, annual } = price.dataset;
-      if (monthly === undefined || annual === undefined) return;
-
-      const newPrice = isAnnual ? annual : monthly;
+      const newPrice = price.dataset[cycle];
+      if (newPrice === undefined) return;
 
       price.style.transform = 'scale(0.8)';
       price.style.opacity = '0';
@@ -158,6 +164,17 @@ function initPricingToggle() {
         price.style.transform = 'scale(1)';
         price.style.opacity = '1';
       }, 150);
+    });
+  };
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      buttons.forEach((b) => {
+        const isActive = b === btn;
+        b.classList.toggle('active', isActive);
+        b.setAttribute('aria-pressed', String(isActive));
+      });
+      applyCycle(btn.dataset.cycle);
     });
   });
 }
@@ -189,17 +206,32 @@ function initFAQ() {
 function initSmoothScroll() {
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
+      const href = this.getAttribute('href');
+
+      // Bare "#" links (logo, placeholder footer links): scroll to top.
+      // Previously this threw a SyntaxError on querySelector('#').
+      if (!href || href === '#') {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+        return;
+      }
+
+      let target;
+      try {
+        target = document.querySelector(href);
+      } catch (_) {
+        return; // Not a valid selector — let the browser handle the link.
+      }
 
       if (target) {
+        e.preventDefault();
         const headerOffset = 100;
         const elementPosition = target.getBoundingClientRect().top;
         const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
         window.scrollTo({
           top: offsetPosition,
-          behavior: 'smooth'
+          behavior: prefersReducedMotion ? 'auto' : 'smooth'
         });
       }
     });
@@ -253,12 +285,88 @@ function initParticles() {
   const container = document.querySelector('.bg-particles');
   if (!container) return;
 
+  // Skip the floating dots when motion is reduced.
+  if (prefersReducedMotion) return;
+
   // Create particles
   for (let i = 0; i < 10; i++) {
     const particle = document.createElement('div');
     particle.className = 'particle';
     container.appendChild(particle);
   }
+}
+
+/* ========== Cursor Spotlight (feature cards) ========== */
+function initSpotlight() {
+  if (!hasFinePointer) return;
+
+  document.querySelectorAll('.feature-card').forEach(card => {
+    card.addEventListener('pointermove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      card.style.setProperty('--mx', `${x}%`);
+      card.style.setProperty('--my', `${y}%`);
+    });
+  });
+}
+
+/* ========== Magnetic Buttons (primary CTAs) ========== */
+function initMagnetic() {
+  if (!hasFinePointer || prefersReducedMotion) return;
+
+  const strength = 0.28;
+  const max = 7; // px
+
+  document.querySelectorAll('.btn-primary').forEach(btn => {
+    btn.addEventListener('pointerenter', () => {
+      btn.style.transition = 'transform 180ms cubic-bezier(0.25, 1, 0.5, 1)';
+    });
+
+    btn.addEventListener('pointermove', (e) => {
+      const rect = btn.getBoundingClientRect();
+      const mx = e.clientX - (rect.left + rect.width / 2);
+      const my = e.clientY - (rect.top + rect.height / 2);
+      const tx = Math.max(-max, Math.min(max, mx * strength));
+      const ty = Math.max(-max, Math.min(max, my * strength));
+      btn.style.transform = `translate(${tx}px, ${ty}px)`;
+    });
+
+    btn.addEventListener('pointerleave', () => {
+      // Clear inline styles so the CSS spring eases the button home.
+      btn.style.transition = '';
+      btn.style.transform = '';
+    });
+  });
+}
+
+/* ========== Hero App-Window Tilt (parallax) ========== */
+function initHeroTilt() {
+  if (!hasFinePointer || prefersReducedMotion) return;
+
+  const hero = document.getElementById('hero');
+  const win = document.getElementById('appWindow');
+  if (!hero || !win) return;
+
+  let raf = null;
+
+  hero.addEventListener('pointermove', (e) => {
+    const rect = hero.getBoundingClientRect();
+    const px = (e.clientX - rect.left) / rect.width - 0.5;  // -0.5 .. 0.5
+    const py = (e.clientY - rect.top) / rect.height - 0.5;
+
+    if (raf) cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(() => {
+      const ry = -7 + px * 6;  // base -7deg, ±3deg
+      const rx = 3 - py * 6;   // base  3deg, ±3deg
+      win.style.transform = `perspective(1600px) rotateY(${ry}deg) rotateX(${rx}deg)`;
+    });
+  });
+
+  hero.addEventListener('pointerleave', () => {
+    if (raf) cancelAnimationFrame(raf);
+    win.style.transform = ''; // settle back to the CSS resting pose
+  });
 }
 
 /* ========== Utility Functions ========== */
@@ -338,94 +446,7 @@ ctaForms.forEach(ctaForm => {
       // Get the page name
       const pageName = document.title || 'ISPWatch Landing Page';
 
-      // Send email via FormSubmit.co
-      const htmlBody = `
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nueva Solicitud de Acceso - ISPWatch</title>
-</head>
-<body style="margin:0;padding:0;background-color:#0f172a;font-family:'Segoe UI',Arial,sans-serif;">
-  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#0f172a;padding:40px 20px;">
-    <tr>
-      <td align="center">
-        <table width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%;">
-
-          <!-- Header -->
-          <tr>
-            <td style="background:linear-gradient(135deg,#6366f1 0%,#8b5cf6 50%,#06b6d4 100%);border-radius:16px 16px 0 0;padding:40px 40px 32px;text-align:center;">
-              <div style="display:inline-block;background:rgba(255,255,255,0.15);border-radius:12px;padding:10px 20px;margin-bottom:20px;">
-                <span style="color:#ffffff;font-size:20px;font-weight:800;letter-spacing:1px;">📡 ISPWatch</span>
-              </div>
-              <h1 style="color:#ffffff;font-size:26px;font-weight:700;margin:0 0 8px 0;line-height:1.3;">🚀 Nueva Solicitud de Acceso</h1>
-              <p style="color:rgba(255,255,255,0.8);font-size:15px;margin:0;">Un usuario quiere probar ISPWatch CRM</p>
-            </td>
-          </tr>
-
-          <!-- Body -->
-          <tr>
-            <td style="background:#1e293b;padding:32px 40px;">
-
-              <!-- Alert banner -->
-              <div style="background:linear-gradient(135deg,rgba(99,102,241,0.2),rgba(6,182,212,0.2));border:1px solid rgba(99,102,241,0.4);border-radius:10px;padding:16px 20px;margin-bottom:28px;text-align:center;">
-                <p style="color:#a5b4fc;font-size:14px;font-weight:600;margin:0;text-transform:uppercase;letter-spacing:1px;">⚡ Acción Requerida</p>
-                <p style="color:#e2e8f0;font-size:13px;margin:6px 0 0 0;">Contactar al usuario dentro de las próximas <strong style="color:#818cf8;">24 horas</strong></p>
-              </div>
-
-              <!-- Email info card -->
-              <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:24px;">
-                <tr>
-                  <td style="background:#0f172a;border:1px solid rgba(99,102,241,0.3);border-radius:12px;padding:24px;">
-                    <p style="color:#94a3b8;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;margin:0 0 8px 0;">📧 Correo del Usuario</p>
-                    <p style="color:#6366f1;font-size:20px;font-weight:700;margin:0;word-break:break-all;">${email}</p>
-                  </td>
-                </tr>
-              </table>
-
-              <!-- Details grid -->
-              <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:24px;">
-                <tr>
-                  <td width="48%" style="background:#0f172a;border:1px solid rgba(148,163,184,0.15);border-radius:12px;padding:20px;vertical-align:top;">
-                    <p style="color:#94a3b8;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;margin:0 0 6px 0;">📍 Origen</p>
-                    <p style="color:#e2e8f0;font-size:14px;font-weight:600;margin:0;">${pageName}</p>
-                  </td>
-                  <td width="4%"></td>
-                  <td width="48%" style="background:#0f172a;border:1px solid rgba(148,163,184,0.15);border-radius:12px;padding:20px;vertical-align:top;">
-                    <p style="color:#94a3b8;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;margin:0 0 6px 0;">📅 Fecha y Hora</p>
-                    <p style="color:#e2e8f0;font-size:14px;font-weight:600;margin:0;">${dateStr}</p>
-                  </td>
-                </tr>
-              </table>
-
-              <!-- CTA button -->
-              <div style="text-align:center;margin-top:28px;">
-                <a href="mailto:${email}" style="display:inline-block;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#ffffff;text-decoration:none;font-size:15px;font-weight:700;padding:14px 36px;border-radius:50px;letter-spacing:0.5px;">📨 Responder al Usuario</a>
-              </div>
-
-            </td>
-          </tr>
-
-          <!-- Footer -->
-          <tr>
-            <td style="background:#0f172a;border-radius:0 0 16px 16px;padding:24px 40px;text-align:center;border-top:1px solid rgba(99,102,241,0.2);">
-              <p style="color:#475569;font-size:13px;margin:0 0 8px 0;">Este correo fue generado automáticamente por el sistema ISPWatch.</p>
-              <p style="margin:0;">
-                <a href="https://ispwatch-crm.app" style="color:#6366f1;text-decoration:none;font-size:13px;font-weight:600;">ispwatch-crm.app</a>
-                <span style="color:#334155;margin:0 8px;">·</span>
-                <a href="mailto:info@ispwatch-crm.com" style="color:#6366f1;text-decoration:none;font-size:13px;">info@ispwatch-crm.com</a>
-              </p>
-            </td>
-          </tr>
-
-        </table>
-      </td>
-    </tr>
-  </table>
-</body>
-</html>
-      `;
+      // Notificacion enviada como tabla limpia via FormSubmit (campos en el fetch).
 
       const response = await fetch(EMAIL_ENDPOINT, {
         method: 'POST',
@@ -434,11 +455,13 @@ ctaForms.forEach(ctaForm => {
           'Accept': 'application/json'
         },
         body: JSON.stringify({
-          _subject: '🚀 Nueva Solicitud de Acceso - ISPWatch CRM',
+          _subject: '🚀 Nueva solicitud de acceso - ISPWatch CRM',
           _template: 'table',
-          email: email,
           _captcha: 'false',
-          message: htmlBody
+          email: email,
+          Solicitud: 'Un cliente quiere probar ISPWatch CRM y pide que lo contacten.',
+          Origen: pageName,
+          Fecha: dateStr
         })
       });
 
