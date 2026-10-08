@@ -1,0 +1,5 @@
+# Cabeceras de Cloudflare Pages: https://developers.cloudflare.com/pages/configuration/headers/
+# Las fuentes no cambian nunca (si cambian, cambia el nombre del archivo): caché de 1 año.
+# CSS/JS NO van aquí: se versionan con ?v=AAAAMMDD en el HTML y usan la caché por defecto.
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable

@@ -40,16 +40,11 @@
   <link rel="icon" type="image/png" sizes="any" href="images/logo.png">
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap"
-    rel="stylesheet">
 
   <!-- Styles -->
-  <link rel="stylesheet" href="styles/main.css">
-  <link rel="stylesheet" href="styles/animations.css">
+  <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles/main.css?v=20261008">
+  <link rel="stylesheet" href="styles/animations.css?v=20261008">
 
   <!-- Schema.org Structured Data -->
   <script type="application/ld+json">
@@ -206,7 +201,7 @@
         <div class="pricing-card reveal reveal-delay-1" id="gratis">
           <span class="pricing-badge pricing-badge-free">Gratis</span>
           <div class="pricing-header">
-            <h3 class="pricing-name">Gratis</h3>
+            <h2 class="pricing-name">Gratis</h2>
             <p class="pricing-description">Gratis para siempre, ideal para empezar</p>
             <div class="pricing-price">
               <span class="pricing-currency">$</span>
@@ -266,7 +261,7 @@
         <!-- Emprendedor Plan -->
         <div class="pricing-card reveal reveal-delay-2" id="emprendedor">
           <div class="pricing-header">
-            <h3 class="pricing-name">Emprendedor</h3>
+            <h2 class="pricing-name">Emprendedor</h2>
             <p class="pricing-description">Para micro y pequeños ISP que ya facturan</p>
             <div class="pricing-price">
               <span class="pricing-currency">$</span>
@@ -333,7 +328,7 @@
         <div class="pricing-card featured reveal reveal-delay-3" id="crecimiento">
           <span class="pricing-badge">Más Popular</span>
           <div class="pricing-header">
-            <h3 class="pricing-name">Crecimiento</h3>
+            <h2 class="pricing-name">Crecimiento</h2>
             <p class="pricing-description">Para ISPs en crecimiento</p>
             <div class="pricing-price">
               <span class="pricing-currency">$</span>
@@ -397,7 +392,7 @@
         <!-- Ilimitado Plan -->
         <div class="pricing-card reveal reveal-delay-4" id="ilimitado">
           <div class="pricing-header">
-            <h3 class="pricing-name">Ilimitado</h3>
+            <h2 class="pricing-name">Ilimitado</h2>
             <p class="pricing-description">Para operadores sin límites</p>
             <div class="pricing-price">
               <span class="pricing-currency">$</span>
@@ -729,7 +724,7 @@
         </div>
 
         <div class="footer-column">
-          <h4>Producto</h4>
+          <h3>Producto</h3>
           <ul class="footer-links">
             <li><a href="/caracteristicas">Características</a></li>
             <li><a href="/precios">Precios</a></li>
@@ -738,7 +733,7 @@
         </div>
 
         <div class="footer-column">
-          <h4>Recursos</h4>
+          <h3>Recursos</h3>
           <ul class="footer-links">
             <li><a href="/faq">Preguntas frecuentes</a></li>
             <li><a href="/precios#ofertas">Ofertas de lanzamiento</a></li>
@@ -747,7 +742,7 @@
         </div>
 
         <div class="footer-column">
-          <h4>Legal</h4>
+          <h3>Legal</h3>
           <ul class="footer-links">
             <li><a href="/legal#terminos">Términos y condiciones</a></li>
             <li><a href="/legal#privacidad">Privacidad</a></li>
@@ -762,7 +757,7 @@
     </div>
   </footer>
 
-  <script src="js/main.js"></script>
+  <script src="js/main.js?v=20261008"></script>
 </body>
 
 </html>
