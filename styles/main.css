@@ -887,6 +887,19 @@ textarea {
   transform: translateY(-2px);
 }
 
+.trusted-logo {
+  text-align: center;
+}
+
+.trusted-logo-sub {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
 /* ========== Features Section ========== */
 .features {
   background: var(--gradient-bg);
@@ -1377,6 +1390,21 @@ textarea {
   color: var(--text-secondary);
 }
 
+.founders-card {
+  max-width: 640px;
+  margin: 48px auto 0;
+  text-align: center;
+}
+
+.founders-card .offer-icon {
+  display: flex;
+  margin: 0 auto 20px;
+}
+
+.founders-card .btn {
+  margin-top: 24px;
+}
+
 /* ========== Testimonials ========== */
 .testimonials {
   background: var(--bg-primary);
@@ -1628,7 +1656,7 @@ textarea {
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 2fr repeat(4, 1fr);
+  grid-template-columns: 2fr repeat(3, 1fr);
   gap: 48px;
   margin-bottom: 60px;
 }

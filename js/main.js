@@ -240,7 +240,7 @@ function initSmoothScroll() {
 
 /* ========== Counter Animation ========== */
 function initCounterAnimation() {
-  const counters = document.querySelectorAll('.stat-value');
+  const counters = document.querySelectorAll('.stat-value[data-target]');
   const speed = 200;
 
   const animateCounter = (counter) => {
