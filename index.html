@@ -52,18 +52,13 @@
   <link rel="icon" type="image/png" sizes="any" href="images/logo.png">
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 
-  <!-- Preconnect & Preload for Performance -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
-  <link rel="preload" as="style" href="styles/main.css">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap"
-    rel="stylesheet">
+  <!-- Preload for Performance -->
+  <link rel="preload" as="style" href="styles/main.css?v=20261008">
+  <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 
   <!-- Styles -->
-  <link rel="stylesheet" href="styles/main.css">
-  <link rel="stylesheet" href="styles/animations.css">
+  <link rel="stylesheet" href="styles/main.css?v=20261008">
+  <link rel="stylesheet" href="styles/animations.css?v=20261008">
 
   <!-- Schema.org Structured Data -->
   <script type="application/ld+json">
@@ -369,9 +364,14 @@
               </div>
             </div>
             <div class="app-window-body hero-image">
-              <img src="images/dashboard.png" width="1892" height="873"
-                alt="Panel de control de ISPWatch CRM: clientes activos, ingresos del mes, tickets y routers configurados"
-                loading="eager" fetchpriority="high">
+              <picture>
+                <source type="image/webp"
+                  srcset="images/dashboard-960.webp 960w, images/dashboard.webp 1892w"
+                  sizes="(max-width: 1024px) 92vw, 600px">
+                <img src="images/dashboard.png" width="1892" height="873"
+                  alt="Panel de control de ISPWatch CRM: clientes activos, ingresos del mes, tickets y routers configurados"
+                  loading="eager" fetchpriority="high">
+              </picture>
               <div class="app-window-glare"></div>
             </div>
           </div>
@@ -384,7 +384,7 @@
               </svg>
             </div>
             <div class="float-text">
-              <h4>192.168.1.0/24</h4>
+              <p class="float-title">192.168.1.0/24</p>
               <p>Subred asignada</p>
             </div>
           </div>
@@ -397,7 +397,7 @@
               </svg>
             </div>
             <div class="float-text">
-              <h4>Pago recibido</h4>
+              <p class="float-title">Pago recibido</p>
               <p>Cliente reconectado al instante</p>
             </div>
           </div>
@@ -411,8 +411,14 @@
     <div class="container">
       <p class="trusted-text">ISPs que ya gestionan su red con ISPWatch</p>
       <div class="trusted-logos">
-        <div class="trusted-logo">Colombianet de Occidente<span class="trusted-logo-sub">Sector Tocaima</span></div>
-        <div class="trusted-logo">Colombianet de Occidente<span class="trusted-logo-sub">Sector Chaguaní</span></div>
+        <div class="trusted-logo">
+          <span class="trusted-logo-name">Colombianet de Occidente</span>
+          <span class="trusted-logo-sub">Sector Tocaima</span>
+        </div>
+        <div class="trusted-logo">
+          <span class="trusted-logo-name">Colombianet de Occidente</span>
+          <span class="trusted-logo-sub">Sector Chaguaní</span>
+        </div>
       </div>
     </div>
   </section>
@@ -1133,7 +1139,7 @@
         </div>
 
         <div class="footer-column">
-          <h4>Producto</h4>
+          <h3>Producto</h3>
           <ul class="footer-links">
             <li><a href="/caracteristicas">Características</a></li>
             <li><a href="/precios">Precios</a></li>
@@ -1142,7 +1148,7 @@
         </div>
 
         <div class="footer-column">
-          <h4>Recursos</h4>
+          <h3>Recursos</h3>
           <ul class="footer-links">
             <li><a href="/faq">Preguntas frecuentes</a></li>
             <li><a href="/precios#ofertas">Ofertas de lanzamiento</a></li>
@@ -1151,7 +1157,7 @@
         </div>
 
         <div class="footer-column">
-          <h4>Legal</h4>
+          <h3>Legal</h3>
           <ul class="footer-links">
             <li><a href="/legal#terminos">Términos y condiciones</a></li>
             <li><a href="/legal#privacidad">Privacidad</a></li>
@@ -1171,7 +1177,7 @@
   </footer>
 
 
-  <script src="js/main.js"></script>
+  <script src="js/main.js?v=20261008"></script>
 </body>
 
 </html>

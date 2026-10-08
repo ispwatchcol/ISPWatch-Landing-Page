@@ -39,16 +39,11 @@
     <link rel="icon" type="image/png" sizes="any" href="images/logo.png">
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap"
-        rel="stylesheet">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/animations.css">
+    <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="styles/main.css?v=20261008">
+    <link rel="stylesheet" href="styles/animations.css?v=20261008">
 
     <!-- Schema.org Structured Data -->
     <script type="application/ld+json">
@@ -219,7 +214,7 @@
                             <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                         </svg>
                     </div>
-                    <h3>Gestión de Clientes</h3>
+                    <h2>Gestión de Clientes</h2>
                     <p>Administra todos tus clientes, sus planes, estados de conexión y datos personales en un solo
                         lugar
                         centralizado.</p>
@@ -243,7 +238,7 @@
                             <line x1="6" y1="18" x2="6.01" y2="18" />
                         </svg>
                     </div>
-                    <h3>Control de IPs</h3>
+                    <h2>Control de IPs</h2>
                     <p>Asigna, monitorea y gestiona direcciones IP y subredes. Visualiza el uso de tu pool de IPs en
                         tiempo real.
                     </p>
@@ -273,7 +268,7 @@
                             <line x1="1" y1="14" x2="4" y2="14" />
                         </svg>
                     </div>
-                    <h3>Integración MikroTik</h3>
+                    <h2>Integración MikroTik</h2>
                     <p>Conexión directa con RouterOS. Gestiona colas, firewall, VPN y más desde nuestra interfaz
                         intuitiva.</p>
                     <ul style="margin-top: 16px; padding-left: 24px; font-size: 14px; line-height: 1.8; opacity: 0.9;">
@@ -297,7 +292,7 @@
                             <line x1="12" y1="22.08" x2="12" y2="12" />
                         </svg>
                     </div>
-                    <h3>Inventario de Equipos</h3>
+                    <h2>Inventario de Equipos</h2>
                     <p>Controla tu inventario de routers, ONTs, cables y equipos. Tracking de asignaciones y
                         disponibilidad.</p>
                     <ul style="margin-top: 16px; padding-left: 24px; font-size: 14px; line-height: 1.8; opacity: 0.9;">
@@ -318,7 +313,7 @@
                             <polyline points="22,6 12,13 2,6" />
                         </svg>
                     </div>
-                    <h3>Sistema de Tickets</h3>
+                    <h2>Sistema de Tickets</h2>
                     <p>Gestiona solicitudes de soporte, reclamos y consultas. Asigna técnicos y haz seguimiento en
                         tiempo real.
                     </p>
@@ -340,7 +335,7 @@
                             <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
                         </svg>
                     </div>
-                    <h3>Facturación Automatizada</h3>
+                    <h2>Facturación Automatizada</h2>
                     <p>Genera facturas, controla pagos, envía recordatorios automáticos y gestiona morosos
                         eficientemente.</p>
                     <ul style="margin-top: 16px; padding-left: 24px; font-size: 14px; line-height: 1.8; opacity: 0.9;">
@@ -361,7 +356,7 @@
                             <path d="M7 11V7a5 5 0 0 1 10 0v4" />
                         </svg>
                     </div>
-                    <h3>VPN Segura</h3>
+                    <h2>VPN Segura</h2>
                     <p>Conectividad segura L2TP entre nodos. Monitorea el estado de conexiones VPN en tiempo real.</p>
                     <ul style="margin-top: 16px; padding-left: 24px; font-size: 14px; line-height: 1.8; opacity: 0.9;">
                         <li>Túneles VPN L2TP</li>
@@ -383,7 +378,7 @@
                             <rect x="2" y="2" width="20" height="20" rx="2" />
                         </svg>
                     </div>
-                    <h3>Dashboard Analítico</h3>
+                    <h2>Dashboard Analítico</h2>
                     <p>Visualiza métricas clave, ingresos, clientes activos, tickets pendientes y mucho más en tiempo
                         real.</p>
                     <ul style="margin-top: 16px; padding-left: 24px; font-size: 14px; line-height: 1.8; opacity: 0.9;">
@@ -404,7 +399,7 @@
                             <path d="M9 12l2 2 4-4" />
                         </svg>
                     </div>
-                    <h3>Multi-Tenancy</h3>
+                    <h2>Multi-Tenancy</h2>
                     <p>Arquitectura multi-tenant para gestionar múltiples ISPs o franquicias desde una sola instalación.
                     </p>
                     <ul style="margin-top: 16px; padding-left: 24px; font-size: 14px; line-height: 1.8; opacity: 0.9;">
@@ -484,7 +479,7 @@
                 </div>
 
                 <div class="footer-column">
-                    <h4>Producto</h4>
+                    <h3>Producto</h3>
                     <ul class="footer-links">
                         <li><a href="/caracteristicas">Características</a></li>
                         <li><a href="/precios">Precios</a></li>
@@ -493,7 +488,7 @@
                 </div>
 
                 <div class="footer-column">
-                    <h4>Recursos</h4>
+                    <h3>Recursos</h3>
                     <ul class="footer-links">
                         <li><a href="/faq">Preguntas frecuentes</a></li>
                         <li><a href="/precios#ofertas">Ofertas de lanzamiento</a></li>
@@ -502,7 +497,7 @@
                 </div>
 
                 <div class="footer-column">
-                    <h4>Legal</h4>
+                    <h3>Legal</h3>
                     <ul class="footer-links">
                         <li><a href="/legal#terminos">Términos y condiciones</a></li>
                         <li><a href="/legal#privacidad">Privacidad</a></li>
@@ -517,7 +512,7 @@
         </div>
     </footer>
 
-    <script src="js/main.js"></script>
+    <script src="js/main.js?v=20261008"></script>
 </body>
 
 </html>
